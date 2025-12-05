@@ -1,0 +1,71 @@
+index.html<!DOCTYPE html>
+<html>
+<head>
+    <title>Clicker Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #btn {
+            padding: 20px 40px;
+            font-size: 24px;
+            border: none;
+            border-radius: 12px;
+            background: #ff2d55;
+            color: white;
+        }
+        #btn:active {
+            transform: scale(0.95);
+        }
+        .upgrade {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #444;
+            border-radius: 8px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clicker Game</h1>
+    <h2>Points: <span id="points">0</span></h2>
+
+    <button id="btn" onclick="addPoints()">CLICK ME</button>
+
+    <div class="upgrade" onclick="buyUpgrade()">
+        <p>Upgrade Click (+1 per click)</p>
+        <p>Cost: <span id="cost">20</span></p>
+    </div>
+
+    <script>
+        let points = 0;
+        let perClick = 1;
+        let upgradeCost = 20;
+
+        function addPoints() {
+            points += perClick;
+            updateDisplay();
+        }
+
+        function buyUpgrade() {
+            if (points >= upgradeCost) {
+                points -= upgradeCost;
+                perClick++;
+                upgradeCost = Math.floor(upgradeCost * 1.5);
+                updateDisplay();
+            } else {
+                alert("Not enough points!");
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById("points").innerText = points;
+            document.getElementById("cost").innerText = upgradeCost;
+        }
+    </script>
+</body>
+</html>
